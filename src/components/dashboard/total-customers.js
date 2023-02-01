@@ -1,36 +1,25 @@
-import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import PeopleIcon from '@mui/icons-material/PeopleOutlined';
+import { Avatar, Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 
 export const TotalCustomers = (props) => (
   <Card {...props}>
     <CardContent>
-      <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: 'space-between' }}
-      >
+      <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
-          <Typography
-            color="textSecondary"
-            gutterBottom
-            variant="overline"
-          >
-            TOTAL CUSTOMERS
+          <Typography color="textSecondary" gutterBottom variant="overline">
+            TỔNG SỐ KHÁCH HÀNG
           </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h4"
-          >
-            1,6k
+          <Typography color="textPrimary" variant="h4">
+            100
           </Typography>
         </Grid>
         <Grid item>
           <Avatar
             sx={{
-              backgroundColor: 'success.main',
+              backgroundColor: "success.main",
               height: 56,
-              width: 56
+              width: 56,
             }}
           >
             <PeopleIcon />
@@ -39,25 +28,22 @@ export const TotalCustomers = (props) => (
       </Grid>
       <Box
         sx={{
-          alignItems: 'center',
-          display: 'flex',
-          pt: 2
+          alignItems: "center",
+          display: "flex",
+          pt: 2,
         }}
       >
         <ArrowUpwardIcon color="success" />
         <Typography
           variant="body2"
           sx={{
-            mr: 1
+            mr: 1,
           }}
         >
-          16%
+          20%
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="caption"
-        >
-          Since last month
+        <Typography color="textSecondary" variant="caption">
+          So với tháng trước
         </Typography>
       </Box>
     </CardContent>
