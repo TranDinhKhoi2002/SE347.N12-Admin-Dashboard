@@ -1,90 +1,60 @@
-import PropTypes from 'prop-types';
-import { Avatar, Box, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
-import { Clock as ClockIcon } from '../../icons/clock';
-import { Download as DownloadIcon } from '../../icons/download';
+import { Box, Button, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import Image from "next/image";
+import PropTypes from "prop-types";
+import Iconify from "../ui/Iconify";
 
 export const ProductCard = ({ product, ...rest }) => (
   <Card
     sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%'
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
     }}
     {...rest}
   >
-    <CardContent>
+    <CardContent sx={{ p: 0 }}>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          pb: 3
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          height: "300px",
+          width: "100%",
         }}
       >
-        <Avatar
-          alt="Product"
-          src={product.media}
-          variant="square"
-        />
+        <Image alt="Product-image" src={product.image} layout="fill" objectFit="cover" />
       </Box>
-      <Typography
-        align="center"
-        color="textPrimary"
-        gutterBottom
-        variant="h5"
-      >
-        {product.title}
-      </Typography>
-      <Typography
-        align="center"
-        color="textPrimary"
-        variant="body1"
-      >
-        {product.description}
-      </Typography>
+      <Box sx={{ px: 2, py: 1 }}>
+        <Typography
+          color="textPrimary"
+          gutterBottom
+          variant="h6"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: "1",
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          {product.name}
+        </Typography>
+      </Box>
     </CardContent>
-    <Box sx={{ flexGrow: 1 }} />
     <Divider />
     <Box sx={{ p: 2 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ justifyContent: 'space-between' }}
-      >
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <ClockIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            Updated 2hr ago
-          </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Button fullWidth variant="outlined" color="primary">
+            <Iconify icon="material-symbols:edit" sx={{ mr: 1, height: "20px", width: "20px" }} />
+            Chỉnh sửa
+          </Button>
         </Grid>
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <DownloadIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            {product.totalDownloads}
-            {' '}
-            Downloads
-          </Typography>
+        <Grid item xs={6}>
+          <Button fullWidth variant="outlined" color="error">
+            <Iconify icon="ic:baseline-delete" sx={{ mr: 1, height: "20px", width: "20px" }} />
+            Xóa
+          </Button>
         </Grid>
       </Grid>
     </Box>
@@ -92,5 +62,5 @@ export const ProductCard = ({ product, ...rest }) => (
 );
 
 ProductCard.propTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
 };

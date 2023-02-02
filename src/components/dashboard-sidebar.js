@@ -30,8 +30,13 @@ const items = [
   },
   {
     href: "/products",
-    icon: <ShoppingBagIcon fontSize="small" />,
-    title: "Products",
+    icon: <Iconify icon="fa6-solid:basket-shopping" />,
+    title: "Sản phẩm",
+  },
+  {
+    href: "/transactions",
+    icon: <Iconify icon="carbon:cics-transaction-server-zos" />,
+    title: "Giao dịch",
   },
   {
     href: "/categories",
