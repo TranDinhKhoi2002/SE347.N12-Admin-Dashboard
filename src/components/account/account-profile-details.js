@@ -9,6 +9,7 @@ import {
   Grid,
   TextField
 } from '@mui/material';
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
@@ -16,7 +17,8 @@ export const AccountProfileDetails = (props) => {
     lastName: 'Smith',
     email: 'demo@devias.io',
     phone: '',
-    address: 'USA'
+    address: 'USA',
+    birthday: new Date(),
   });
 
   const handleChange = (event) => {
@@ -27,26 +29,13 @@ export const AccountProfileDetails = (props) => {
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
+    <form autoComplete="off" noValidate {...props}>
       <Card>
-        <CardHeader
-          title="Thông tin cá nhân"
-        />
+        <CardHeader title="Thông tin cá nhân" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Họ"
@@ -57,11 +46,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Tên"
@@ -72,11 +57,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Email"
@@ -87,11 +68,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Số điện thoại"
@@ -102,11 +79,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={12} xs={12}>
               <TextField
                 fullWidth
                 label="Địa chỉ"
@@ -117,20 +90,30 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
+            <Grid item md={6} xs={12}>
+              <DatePicker
+                openTo="year"
+                views={["year", "month", "day"]}
+                label="Ngày sinh"
+                name="birthday"
+                value={values.birthday}
+                onChange={(newValue) => {
+                  setValues({...values, birthday: newValue})
+                }}
+                renderInput={(params) => <TextField {...params} helperText={null} />}
+              />
+            </Grid>
           </Grid>
         </CardContent>
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
+          <Button color="primary" variant="contained">
             Lưu
           </Button>
         </Box>
