@@ -14,7 +14,7 @@ const columns = ({ handleSelectTransaction }) => [
     width: 100,
     renderCell: (params) => {
       const { row } = params;
-      return `${row.id.toString().substring(0, 6)}`;
+      return `${row.id.toString().substring(0, 8).toUpperCase()}`;
     },
   },
   {
