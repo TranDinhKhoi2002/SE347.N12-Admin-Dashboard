@@ -8,14 +8,28 @@ import {
   Divider,
   Typography
 } from '@mui/material';
+import { useState } from 'react';
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
   name: 'Katarina Smith',
 };
 
-export const AccountProfile = (props) => (
-  <Card {...props}>
+
+
+export const AccountProfile = (props) => {
+  const [values, setValues] = useState({
+    avatar: user.avatar,
+  });
+
+  const uploadImage = (e) => {
+    console.log(e.target.result);
+    setValues({
+      ...values,
+      avatar: URL.createObjectURL(e.target.files[0])
+    })
+  }
+  return <Card {...props}>
     <CardContent>
       <Box
         sx={{
@@ -25,7 +39,7 @@ export const AccountProfile = (props) => (
         }}
       >
         <Avatar
-          src={user.avatar}
+          src={values.avatar}
           sx={{
             height: 64,
             mb: 2,
@@ -47,9 +61,15 @@ export const AccountProfile = (props) => (
         color="primary"
         fullWidth
         variant="text"
+        component="label"
       >
         Thay đổi ảnh
+        <input type="file" accept="image/png, image/gif, image/jpeg"
+              hidden
+              onChange={(e) => {
+                uploadImage(e);
+              }} />
       </Button>
     </CardActions>
   </Card>
-);
+};
