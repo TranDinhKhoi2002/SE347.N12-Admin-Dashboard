@@ -11,6 +11,7 @@ import {
 import { Download as DownloadIcon } from "../../icons/download";
 import { Search as SearchIcon } from "../../icons/search";
 import { Upload as UploadIcon } from "../../icons/upload";
+import NextLink from "next/link";
 
 export const ProductListToolbar = (props) => (
   <Box {...props}>
@@ -26,10 +27,13 @@ export const ProductListToolbar = (props) => (
       <Typography sx={{ m: 1 }} variant="h4">
         Sản phẩm
       </Typography>
+
       <Box sx={{ m: 1 }}>
-        <Button color="primary" variant="contained">
-          Thêm sản phẩm
-        </Button>
+        <NextLink href={"/products/add-new-product"} passHref>
+          <Button color="primary" variant="contained">
+            Thêm sản phẩm
+          </Button>
+        </NextLink>
       </Box>
     </Box>
     <Box sx={{ mt: 3 }}>
