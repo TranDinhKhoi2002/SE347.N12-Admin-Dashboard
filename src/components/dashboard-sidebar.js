@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { Box, Divider, Drawer, Typography, useMediaQuery } from "@mui/material";
+import CategoryIcon from "@mui/icons-material/Category";
 import { ChartBar as ChartBarIcon } from "../icons/chart-bar";
 import { Cog as CogIcon } from "../icons/cog";
 import { Lock as LockIcon } from "../icons/lock";
@@ -30,6 +31,11 @@ const items = [
     href: "/products",
     icon: <ShoppingBagIcon fontSize="small" />,
     title: "Products",
+  },
+  {
+    href: "/categories",
+    icon: <CategoryIcon fontSize="small" />,
+    title: "Categories",
   },
   {
     href: "/account",

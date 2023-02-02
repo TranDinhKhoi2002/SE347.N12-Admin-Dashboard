@@ -9,6 +9,7 @@ import { AuthConsumer, AuthProvider } from "../contexts/auth-context";
 import { createEmotionCache } from "../utils/create-emotion-cache";
 import { registerChartJs } from "../utils/register-chart-js";
 import { theme } from "../theme";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 registerChartJs();
 

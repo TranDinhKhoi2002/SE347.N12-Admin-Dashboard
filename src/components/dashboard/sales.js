@@ -1,6 +1,5 @@
 import { Bar } from "react-chartjs-2";
-import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from "@mui/material";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { Box, Card, CardContent, CardHeader, Divider, useTheme } from "@mui/material";
 import CustomSelect from "../ui/CustomSelect";
 import { faker } from "@faker-js/faker";
 import { useState } from "react";
@@ -127,18 +126,6 @@ export const Sales = (props) => {
           <Bar data={data} options={options} />
         </Box>
       </CardContent>
-      <Divider />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          p: 2,
-        }}
-      >
-        <Button color="primary" endIcon={<ArrowRightIcon fontSize="small" />} size="small">
-          Overview
-        </Button>
-      </Box>
     </Card>
   );
 };

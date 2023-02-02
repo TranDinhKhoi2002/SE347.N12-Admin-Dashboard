@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, CardContent, Grid, LinearProgress, Typography } from "@mui/material";
 import InsertChartIcon from "@mui/icons-material/InsertChartOutlined";
 
-export const TasksProgress = (props) => (
+export const ExpectedRevenue = (props) => (
   <Card sx={{ height: "100%" }} {...props}>
     <CardContent>
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
