@@ -10,7 +10,7 @@ export default function ActionsMenu() {
   return (
     <>
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
-        <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
+        <Iconify icon="eva:more-horizontal-fill" width={20} height={20} />
       </IconButton>
 
       <Menu
