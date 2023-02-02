@@ -10,6 +10,8 @@ import {
   TextField
 } from '@mui/material';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
@@ -21,6 +23,27 @@ export const AccountProfileDetails = (props) => {
     birthday: new Date(),
   });
 
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const formik = useFormik({
+    initialValues: {
+      email: "demo@devias.io",
+      firstName: "Katarina",
+      lastName: "Smith",
+      phoneNumber: "0369696969",
+      address: "USA"
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("Email không hợp lệ").max(255).required("Vui lòng nhập email"),
+      firstName: Yup.string().required("Vui lòng nhập họ"),
+      lastName: Yup.string().required("Vui lòng nhập tên"),
+      phoneNumber: Yup.string().matches(phoneRegExp, "Số điện thoại không hợp lệ").required("Vui lòng nhập số điện thoại"),
+      address: Yup.string().required("Vui lòng nhập địa chỉ"),
+    }),
+    onSubmit: () => {
+      Router.push("/").catch(console.error);
+    },
+  });
+
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -29,7 +52,7 @@ export const AccountProfileDetails = (props) => {
   };
 
   return (
-    <form autoComplete="off" noValidate {...props}>
+    <form autoComplete="off" noValidate {...props} onSubmit={formik.handleSubmit}>
       <Card>
         <CardHeader title="Thông tin cá nhân" />
         <Divider />
@@ -37,56 +60,65 @@ export const AccountProfileDetails = (props) => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
                 fullWidth
+                helperText={formik.touched.firstName && formik.errors.firstName}
                 label="Họ"
                 name="firstName"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.firstName}
+                value={formik.values.firstName}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
                 fullWidth
+                helperText={formik.touched.lastName && formik.errors.lastName}
                 label="Tên"
                 name="lastName"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.lastName}
+                value={formik.values.lastName}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.email && formik.errors.email)}
                 fullWidth
+                helperText={formik.touched.email && formik.errors.email}
                 label="Email"
                 name="email"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.email}
+                value={formik.values.email}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
                 fullWidth
+                helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
                 label="Số điện thoại"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
+                name="phoneNumber"
+                onChange={formik.handleChange}
+                value={formik.values.phoneNumber}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <TextField
+                error={Boolean(formik.touched.address && formik.errors.address)}
                 fullWidth
+                helperText={formik.touched.address && formik.errors.address}
                 label="Địa chỉ"
                 name="address"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.address}
+                value={formik.values.address}
                 variant="outlined"
               />
             </Grid>
@@ -113,7 +145,7 @@ export const AccountProfileDetails = (props) => {
             p: 2,
           }}
         >
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" type="submit">
             Lưu
           </Button>
         </Box>
