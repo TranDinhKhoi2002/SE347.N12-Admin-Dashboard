@@ -35,7 +35,7 @@ const items = [
   {
     href: "/categories",
     icon: <CategoryIcon fontSize="small" />,
-    title: "Categories",
+    title: "Danh mục",
   },
   {
     href: "/account",

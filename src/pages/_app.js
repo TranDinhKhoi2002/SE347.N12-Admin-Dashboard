@@ -6,10 +6,12 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { AuthConsumer, AuthProvider } from "../contexts/auth-context";
+import { ToastContainer, toast } from "react-toastify";
 import { createEmotionCache } from "../utils/create-emotion-cache";
 import { registerChartJs } from "../utils/register-chart-js";
 import { theme } from "../theme";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 registerChartJs();
 
@@ -34,6 +36,7 @@ const App = (props) => {
               {(auth) => (auth.isLoading ? <Fragment /> : getLayout(<Component {...pageProps} />))}
             </AuthConsumer>
           </AuthProvider>
+          <ToastContainer theme="colored" autoClose={3000} />
         </ThemeProvider>
       </LocalizationProvider>
     </CacheProvider>

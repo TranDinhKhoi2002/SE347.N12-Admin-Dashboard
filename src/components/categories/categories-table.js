@@ -15,7 +15,7 @@ import {
 import ActionsMenu from "../ui/ActionsMenu";
 import CategoriesModal from "./categories-modal";
 
-export default function CategoriesTable({ categories, ...rest }) {
+export default function CategoriesTable({ categories, onDelete, ...rest }) {
   const [list, setList] = useState(categories);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -65,17 +65,6 @@ export default function CategoriesTable({ categories, ...rest }) {
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
-  };
-
-  const handleDelete = (id) => {
-    const existingCategory = list.find((item) => item.id === id);
-    if (existingCategory.numberOfProducts > 0) {
-      alert("Bạn không thể xóa danh mục đang có sản phẩm");
-      return;
-    }
-
-    const filteredCategories = list.filter((item) => item.id !== id);
-    setList(filteredCategories);
   };
 
   const handleOpenModal = (category) => {
@@ -145,7 +134,7 @@ export default function CategoriesTable({ categories, ...rest }) {
                     <TableCell>{category.numberOfProducts}</TableCell>
                     <TableCell>
                       <ActionsMenu
-                        onDelete={handleDelete.bind(this, category.id)}
+                        onDelete={onDelete.bind(this, category.id)}
                         onEdit={handleOpenModal.bind(this, category)}
                       />
                     </TableCell>
