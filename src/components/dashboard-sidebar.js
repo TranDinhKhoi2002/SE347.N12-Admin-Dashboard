@@ -40,7 +40,7 @@ const items = [
   {
     href: "/account",
     icon: <UserIcon fontSize="small" />,
-    title: "Account",
+    title: "Tài khoản",
   },
   {
     href: "/settings",
