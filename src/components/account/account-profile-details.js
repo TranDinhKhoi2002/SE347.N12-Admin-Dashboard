@@ -9,21 +9,9 @@ import {
   Grid,
   TextField
 } from '@mui/material';
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
@@ -31,8 +19,29 @@ export const AccountProfileDetails = (props) => {
     lastName: 'Smith',
     email: 'demo@devias.io',
     phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    address: 'USA',
+    birthday: new Date(),
+  });
+
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const formik = useFormik({
+    initialValues: {
+      email: "demo@devias.io",
+      firstName: "Katarina",
+      lastName: "Smith",
+      phoneNumber: "0369696969",
+      address: "USA"
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("Email không hợp lệ").max(255).required("Vui lòng nhập email"),
+      firstName: Yup.string().required("Vui lòng nhập họ"),
+      lastName: Yup.string().required("Vui lòng nhập tên"),
+      phoneNumber: Yup.string().matches(phoneRegExp, "Số điện thoại không hợp lệ").required("Vui lòng nhập số điện thoại"),
+      address: Yup.string().required("Vui lòng nhập địa chỉ"),
+    }),
+    onSubmit: () => {
+      Router.push("/").catch(console.error);
+    },
   });
 
   const handleChange = (event) => {
@@ -43,139 +52,101 @@ export const AccountProfileDetails = (props) => {
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
+    <form autoComplete="off" noValidate {...props} onSubmit={formik.handleSubmit}>
       <Card>
-        <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
-        />
+        <CardHeader title="Thông tin cá nhân" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                helperText={formik.touched.firstName && formik.errors.firstName}
+                label="Họ"
                 name="firstName"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.firstName}
+                value={formik.values.firstName}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
                 fullWidth
-                label="Last name"
+                helperText={formik.touched.lastName && formik.errors.lastName}
+                label="Tên"
                 name="lastName"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.lastName}
+                value={formik.values.lastName}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.email && formik.errors.email)}
                 fullWidth
-                label="Email Address"
+                helperText={formik.touched.email && formik.errors.email}
+                label="Email"
                 name="email"
-                onChange={handleChange}
+                onChange={formik.handleChange}
                 required
-                value={values.email}
+                value={formik.values.email}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
+                error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
                 fullWidth
-                label="Phone Number"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
+                helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                label="Số điện thoại"
+                name="phoneNumber"
+                onChange={formik.handleChange}
+                value={formik.values.phoneNumber}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={12} xs={12}>
               <TextField
+                error={Boolean(formik.touched.address && formik.errors.address)}
                 fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
+                helperText={formik.touched.address && formik.errors.address}
+                label="Địa chỉ"
+                name="address"
+                onChange={formik.handleChange}
                 required
-                value={values.country}
+                value={formik.values.address}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+            <Grid item md={6} xs={12}>
+              <DatePicker
+                openTo="year"
+                views={["year", "month", "day"]}
+                label="Ngày sinh"
+                name="birthday"
+                value={values.birthday}
+                onChange={(newValue) => {
+                  setValues({...values, birthday: newValue})
+                }}
+                renderInput={(params) => <TextField {...params} helperText={null} />}
+              />
             </Grid>
           </Grid>
         </CardContent>
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Save details
+          <Button color="primary" variant="contained" type="submit">
+            Lưu
           </Button>
         </Box>
       </Card>

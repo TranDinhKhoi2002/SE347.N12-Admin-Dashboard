@@ -18,7 +18,7 @@ const Page = () => (
     >
       <Container maxWidth="lg">
         <Typography sx={{ mb: 3 }} variant="h4">
-          Account
+          Tài khoản
         </Typography>
         <Grid container spacing={3}>
           <Grid item lg={4} md={6} xs={12}>
