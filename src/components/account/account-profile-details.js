@@ -15,11 +15,6 @@ import * as Yup from 'yup';
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    address: 'USA',
     birthday: new Date(),
   });
 
@@ -39,17 +34,14 @@ export const AccountProfileDetails = (props) => {
       phoneNumber: Yup.string().matches(phoneRegExp, "Số điện thoại không hợp lệ").required("Vui lòng nhập số điện thoại"),
       address: Yup.string().required("Vui lòng nhập địa chỉ"),
     }),
-    onSubmit: () => {
-      Router.push("/").catch(console.error);
+    onSubmit: (values) => {
+      console.log(values);
+      props.setValues({
+        firstName: values.firstName,
+        lastName: values.lastName,
+      });
     },
   });
-
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
 
   return (
     <form autoComplete="off" noValidate {...props} onSubmit={formik.handleSubmit}>
