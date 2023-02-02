@@ -11,7 +11,7 @@ const buyMethods = [
     color: "#3F51B5",
   },
   {
-    title: "Tablet",
+    title: "Mua online",
     value: 66,
     icon: ShoppingCartIcon,
     color: "#E53935",
