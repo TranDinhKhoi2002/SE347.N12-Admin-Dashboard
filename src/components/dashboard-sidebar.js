@@ -15,6 +15,7 @@ import { Users as UsersIcon } from "../icons/users";
 import { XCircle as XCircleIcon } from "../icons/x-circle";
 import { Logo } from "./logo";
 import { NavItem } from "./nav-item";
+import Iconify from "~/components/ui/Iconify";
 
 const items = [
   {
@@ -36,6 +37,11 @@ const items = [
     href: "/categories",
     icon: <CategoryIcon fontSize="small" />,
     title: "Danh mục",
+  },
+  {
+    href: "/orders",
+    icon: <Iconify icon="icon-park-outline:transaction-order" />,
+    title: "Đơn đặt hàng",
   },
   {
     href: "/account",
