@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,35 +7,37 @@ import {
   CardHeader,
   Divider,
   Grid,
-  TextField
-} from '@mui/material';
+  TextField,
+} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
     birthday: new Date(),
   });
 
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const formik = useFormik({
     initialValues: {
       email: "demo@devias.io",
       firstName: "Katarina",
       lastName: "Smith",
       phoneNumber: "0369696969",
-      address: "USA"
+      address: "USA",
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Email không hợp lệ").max(255).required("Vui lòng nhập email"),
       firstName: Yup.string().required("Vui lòng nhập họ"),
       lastName: Yup.string().required("Vui lòng nhập tên"),
-      phoneNumber: Yup.string().matches(phoneRegExp, "Số điện thoại không hợp lệ").required("Vui lòng nhập số điện thoại"),
+      phoneNumber: Yup.string()
+        .matches(phoneRegExp, "Số điện thoại không hợp lệ")
+        .required("Vui lòng nhập số điện thoại"),
       address: Yup.string().required("Vui lòng nhập địa chỉ"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       props.setValues({
         firstName: values.firstName,
         lastName: values.lastName,
@@ -122,7 +124,7 @@ export const AccountProfileDetails = (props) => {
                 name="birthday"
                 value={values.birthday}
                 onChange={(newValue) => {
-                  setValues({...values, birthday: newValue})
+                  setValues({ ...values, birthday: newValue });
                 }}
                 renderInput={(params) => <TextField {...params} helperText={null} />}
               />

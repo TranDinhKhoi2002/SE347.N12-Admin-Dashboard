@@ -8,37 +8,38 @@ import { useState } from "react";
 const Page = () => {
   const [values, setValues] = useState({
     firstName: "Katarina",
-    lastName: "Smith"
-  })
+    lastName: "Smith",
+  });
 
   return (
-  <>
-    <Head>
-      <title>Account | Admin Dashboard</title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8,
-      }}
-    >
-      <Container maxWidth="lg">
-        <Typography sx={{ mb: 3 }} variant="h4">
-          Tài khoản
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item lg={4} md={6} xs={12}>
-            <AccountProfile values={values}/>
+    <>
+      <Head>
+        <title>Account | Admin Dashboard</title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography sx={{ mb: 3 }} variant="h4">
+            Tài khoản
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item lg={4} md={6} xs={12}>
+              <AccountProfile values={values} />
+            </Grid>
+            <Grid item lg={8} md={6} xs={12}>
+              <AccountProfileDetails setValues={setValues} />
+            </Grid>
           </Grid>
-          <Grid item lg={8} md={6} xs={12}>
-            <AccountProfileDetails setValues={setValues}/>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
-  </>
-)};
+        </Container>
+      </Box>
+    </>
+  );
+};
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
