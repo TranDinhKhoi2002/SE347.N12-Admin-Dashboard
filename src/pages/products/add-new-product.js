@@ -1,29 +1,41 @@
-import { Box, Button, Container, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { Chip } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import { useState, useRef } from "react";
 import DataGridView from "~/components/ui/DataGrid";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import Iconify from "~/components/UI/Iconify";
+import { AddProductForm } from "~/components/product/add-product-form";
 
 import { DashboardLayout } from "../../components/dashboard-layout";
 const Page = () => {
-  const inputFileRef = useRef();
-  const [filename, setFilename] = useState("");
-  const [uploadedFile, setUploadedFile] = useState();
-  const handleFileUpload = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      return;
-    }
+  // const inputFileRef = useRef();
+  // const [filename, setFilename] = useState("");
+  // const [uploadedFile, setUploadedFile] = useState();
+  // const handleFileUpload = (e) => {
+  //   if (!e.target.files || e.target.files.length === 0) {
+  //     return;
+  //   }
 
-    const uploadedFilename = e.target.files[0].name;
-    setFilename(uploadedFilename);
-    const reader = new FileReader();
-    reader.onload = function () {
-      setUploadedFile(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
+  //   const uploadedFilename = e.target.files[0].name;
+  //   setFilename(uploadedFilename);
+  //   const reader = new FileReader();
+  //   reader.onload = function () {
+  //     setUploadedFile(reader.result);
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // };
   return (
     <>
       <Head>
@@ -47,18 +59,16 @@ const Page = () => {
             }}
           >
             <Typography sx={{ m: 1 }} variant="h4">
-              Sản phẩm
+              Tạo sản phẩm mới
             </Typography>
-            <Box sx={{ m: 1 }}>
-              <Button color="primary" variant="contained">
-                Tạo sản phẩm
-              </Button>
-            </Box>
           </Box>
-          <Typography sx={{ m: 1 }} variant="h4">
-            Tạo sản phẩm mới
-          </Typography>
-          <Grid container spacing={2} sx={{ mt: 4 }}>
+          <Box sx={{ mt: -8 }}>
+            <AddProductForm />
+            {/* <div>
+              <IconButton>
+                <Iconify icon="heroicons:photo" width={30} height={30} />
+              </IconButton>
+            </div> */}
             {/* <Stack
               direction={{ xs: "column", md: "row" }}
               sx={{ mt: 2 }}
@@ -110,7 +120,7 @@ const Page = () => {
                 )}
               </Button>
             </Stack> */}
-          </Grid>
+          </Box>
         </Container>
       </Box>
     </>
