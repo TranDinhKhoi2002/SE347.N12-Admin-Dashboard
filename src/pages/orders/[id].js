@@ -16,14 +16,14 @@ import { useState, useRef } from "react";
 import DataGridView from "~/components/ui/DataGrid";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import Iconify from "~/components/UI/Iconify";
-import { AddProductForm } from "~/components/product/add-product-form";
+import { OrderDetailForm } from "~/components/order/orderDetail/order-detail-form";
 
 import { DashboardLayout } from "../../components/dashboard-layout";
 const Page = () => {
   return (
     <>
       <Head>
-        <title>Tạo sản phẩm mới | Admin Dashboard</title>
+        <title>Chi tiết đơn hàng | Admin Dashboard</title>
       </Head>
       <Box
         component="main"
@@ -43,11 +43,11 @@ const Page = () => {
             }}
           >
             <Typography sx={{ m: 1 }} variant="h4">
-              Tạo sản phẩm mới
+              Chi tiết đơn hàng
             </Typography>
           </Box>
-          <Box sx={{ mt: -8 }}>
-            <AddProductForm />
+          <Box sx={{ mt: 1 }}>
+            <OrderDetailForm />
           </Box>
         </Container>
       </Box>
@@ -56,5 +56,4 @@ const Page = () => {
 };
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
-
 export default Page;
