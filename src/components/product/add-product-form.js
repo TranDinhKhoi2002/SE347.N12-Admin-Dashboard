@@ -13,12 +13,18 @@ import {
   Stack,
   Typography,
   IconButton,
+  FormControl,
+  MenuItem,
+  InputLabel,
+  Select,
+  FormHelperText,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import Iconify from "~/components/UI/Iconify";
 import { useRouter } from "next/router";
+import { categories as categoryList } from "~/__mocks__/categories";
 import * as Yup from "yup";
 
 export const AddProductForm = () => {
@@ -53,11 +59,13 @@ export const AddProductForm = () => {
       name: "",
       price: "",
       discription: "",
+      category: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Vui lòng nhập tên sản phẩm"),
       price: Yup.string().required("Vui lòng nhập giá sản phẩm"),
       discription: Yup.string().required("Vui lòng nhập mô tả"),
+      category: Yup.string().required("Vui lòng chọn danh mục"),
     }),
     onSubmit: (values) => {
       // props.setValues({
@@ -120,6 +128,29 @@ export const AddProductForm = () => {
                   endAdornment: <InputAdornment position="end">VNĐ</InputAdornment>,
                 }}
               />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <FormControl
+                sx={{ width: "100%", mr: 1 }}
+                error={Boolean(formik.touched.category && formik.errors.category)}
+              >
+                <InputLabel id="demo-select-small" required>
+                  Danh mục
+                </InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  name="category"
+                  value={formik.values.category}
+                  label="Danh mục"
+                  onChange={formik.handleChange}
+                >
+                  {categoryList.map((category) => (
+                    <MenuItem value={category.id}>{category.name}</MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>{formik.touched.category && formik.errors.category}</FormHelperText>
+              </FormControl>
             </Grid>
             <Grid item md={12} xs={12}>
               <TextField
