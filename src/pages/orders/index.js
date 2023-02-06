@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Typography, Box, Container } from "@mui/material";
-import { OrderListResults } from "../components/order/order-list-results";
-import { DashboardLayout } from "../components/dashboard-layout";
+import { OrderListResults } from "../../components/order/order-list-results";
+import { DashboardLayout } from "../../components/dashboard-layout";
 
 const Page = () => (
   <>
