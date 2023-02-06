@@ -13,7 +13,7 @@ const columns = [
     width: 90,
     renderCell: (params) => {
       const { row } = params;
-      return <Typography>{row.id.substring(0, 6)}</Typography>;
+      return <Typography>{row.id.substring(0, 6).toUpperCase()}</Typography>;
     },
   },
   {

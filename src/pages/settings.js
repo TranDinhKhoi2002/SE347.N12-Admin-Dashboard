@@ -18,7 +18,7 @@ const Page = () => (
     >
       <Container maxWidth="lg">
         <Typography sx={{ mb: 3 }} variant="h4">
-          Settings
+          Cài đặt
         </Typography>
         <SettingsNotifications />
         <Box sx={{ pt: 3 }}>

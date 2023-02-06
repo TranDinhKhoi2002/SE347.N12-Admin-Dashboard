@@ -1,31 +1,28 @@
-import { useState } from 'react';
-import { Box, Button, Card, CardContent, CardHeader, Divider, TextField } from '@mui/material';
+import { useState } from "react";
+import { Box, Button, Card, CardContent, CardHeader, Divider, TextField } from "@mui/material";
 
 export const SettingsPassword = (props) => {
   const [values, setValues] = useState({
-    password: '',
-    confirm: ''
+    password: "",
+    confirm: "",
   });
 
   const handleChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   return (
     <form {...props}>
       <Card>
-        <CardHeader
-          subheader="Update password"
-          title="Password"
-        />
+        <CardHeader subheader="Cập nhật mật khẩu" title="Mật khẩu" />
         <Divider />
         <CardContent>
           <TextField
             fullWidth
-            label="Password"
+            label="Mật khẩu"
             margin="normal"
             name="password"
             onChange={handleChange}
@@ -35,7 +32,7 @@ export const SettingsPassword = (props) => {
           />
           <TextField
             fullWidth
-            label="Confirm password"
+            label="Xác nhận mật khẩu"
             margin="normal"
             name="confirm"
             onChange={handleChange}
@@ -47,16 +44,13 @@ export const SettingsPassword = (props) => {
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Update
+          <Button color="primary" variant="contained">
+            Cập nhật
           </Button>
         </Box>
       </Card>

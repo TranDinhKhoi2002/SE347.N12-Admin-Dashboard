@@ -8,70 +8,34 @@ import {
   Divider,
   FormControlLabel,
   Grid,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 
 export const SettingsNotifications = (props) => (
   <form {...props}>
     <Card>
-      <CardHeader
-        subheader="Manage the notifications"
-        title="Notifications"
-      />
+      <CardHeader subheader="Quản lý các thông báo" title="Thông báo" />
       <Divider />
       <CardContent>
-        <Grid
-          container
-          spacing={6}
-          wrap="wrap"
-        >
+        <Grid container spacing={6} wrap="wrap">
           <Grid
             item
             md={4}
             sm={6}
             sx={{
-              display: 'flex',
-              flexDirection: 'column'
+              display: "flex",
+              flexDirection: "column",
             }}
             xs={12}
           >
-            <Typography
-              color="textPrimary"
-              gutterBottom
-              variant="h6"
-            >
-              Notifications
+            <Typography color="textPrimary" gutterBottom variant="h6">
+              Thông báo
             </Typography>
+            <FormControlLabel control={<Checkbox color="primary" defaultChecked />} label="Email" />
+            <FormControlLabel control={<Checkbox />} label="Tin nhắn" />
             <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Email"
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Push Notifications"
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Text Messages"
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Phone calls"
+              control={<Checkbox color="primary" defaultChecked />}
+              label="Cuộc gọi"
             />
           </Grid>
           <Grid
@@ -79,39 +43,18 @@ export const SettingsNotifications = (props) => (
             md={4}
             sm={6}
             sx={{
-              display: 'flex',
-              flexDirection: 'column'
+              display: "flex",
+              flexDirection: "column",
             }}
             xs={12}
           >
-            <Typography
-              color="textPrimary"
-              gutterBottom
-              variant="h6"
-            >
-              Messages
+            <Typography color="textPrimary" gutterBottom variant="h6">
+              Tin nhắn
             </Typography>
+            <FormControlLabel control={<Checkbox color="primary" defaultChecked />} label="Email" />
             <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Email"
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Push Notifications"
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Phone calls"
+              control={<Checkbox color="primary" defaultChecked />}
+              label="Cuộc gọi"
             />
           </Grid>
         </Grid>
@@ -119,16 +62,13 @@ export const SettingsNotifications = (props) => (
       <Divider />
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          p: 2
+          display: "flex",
+          justifyContent: "flex-end",
+          p: 2,
         }}
       >
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Save
+        <Button color="primary" variant="contained">
+          Lưu
         </Button>
       </Box>
     </Card>
