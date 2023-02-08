@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import PropTypes from "prop-types";
 import {
   Box,
   Button,
@@ -19,9 +18,7 @@ import {
   Select,
   FormHelperText,
 } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
-import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import Iconify from "~/components/UI/Iconify";
 import { useRouter } from "next/router";
 import { categories as categoryList } from "~/__mocks__/categories";
@@ -76,7 +73,7 @@ export const AddProductForm = () => {
   });
 
   return (
-    <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
+    <form autoComplete="off" onSubmit={formik.handleSubmit}>
       <Box
         sx={{
           display: "flex",
@@ -94,7 +91,7 @@ export const AddProductForm = () => {
       <Card>
         <CardHeader title="Thông tin sản phẩm" />
         <Divider />
-        <CardContent maxWidth={false}>
+        <CardContent>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
@@ -104,6 +101,7 @@ export const AddProductForm = () => {
                 label="Tên sản phẩm"
                 name="name"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 required
                 value={formik.values.name}
                 variant="outlined"
@@ -121,6 +119,7 @@ export const AddProductForm = () => {
                 // }}
                 fullWidth
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 required
                 value={formik.values.price}
                 variant="outlined"
@@ -146,7 +145,9 @@ export const AddProductForm = () => {
                   onChange={formik.handleChange}
                 >
                   {categoryList.map((category) => (
-                    <MenuItem value={category.id}>{category.name}</MenuItem>
+                    <MenuItem key={category.id} value={category.id}>
+                      {category.name}
+                    </MenuItem>
                   ))}
                 </Select>
                 <FormHelperText>{formik.touched.category && formik.errors.category}</FormHelperText>
@@ -160,6 +161,7 @@ export const AddProductForm = () => {
                 label="Mô tả"
                 name="discription"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.discription}
                 multiline
                 required
@@ -217,7 +219,7 @@ export const AddProductForm = () => {
                         ml: -2,
                         mt: -2.5,
                       }}
-                      onClick={() => handleRemoveImage()}
+                      onClick={handleRemoveImage}
                     >
                       X
                     </IconButton>

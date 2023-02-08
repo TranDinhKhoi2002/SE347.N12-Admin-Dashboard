@@ -151,6 +151,7 @@ export default function CategoriesTable({ categories, onDelete, ...rest }) {
           onRowsPerPageChange={handleLimitChange}
           page={page}
           rowsPerPage={limit}
+          labelRowsPerPage="Số dòng trên trang"
           rowsPerPageOptions={[5, 10, 25]}
         />
       </Card>
