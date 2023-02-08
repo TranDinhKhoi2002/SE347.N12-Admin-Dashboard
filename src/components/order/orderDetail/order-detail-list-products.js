@@ -10,6 +10,7 @@ const columns = [
     field: "name",
     headerName: "Sản phẩm",
     width: 400,
+    flex: 2,
     renderCell: (params) => {
       const { row } = params;
       return (
@@ -29,11 +30,13 @@ const columns = [
     field: "quantity",
     headerName: "Số lượng",
     width: 100,
+    flex: 1,
   },
   {
     field: "price",
     headerName: "Giá tiền",
     width: 140,
+    flex: 1,
     renderCell: (params) => {
       const { row } = params;
       return `${printNumberWithCommas(row.price)} VNĐ`;
@@ -43,6 +46,7 @@ const columns = [
     field: "total",
     headerName: "Tổng tiền",
     width: 140,
+    flex: 1,
     renderCell: (params) => {
       const { row } = params;
       return `${printNumberWithCommas(row.price * row.quantity)} VNĐ`;
@@ -50,10 +54,10 @@ const columns = [
   },
 ];
 
-export const OrderDetailListProducts = ({}) => {
+export const OrderDetailListProducts = ({ order }) => {
   return (
     <Box sx={{ height: 400, width: "100%" }}>
-      <DataGridView rows={productsInOrder} columns={columns} />
+      <DataGridView rows={order} columns={columns} />
     </Box>
   );
 };
