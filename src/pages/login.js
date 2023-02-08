@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login | Admin Dashboard</title>
+        <title>Đăng nhập | Admin Dashboard</title>
       </Head>
       <Box
         component="main"
@@ -46,10 +46,7 @@ const Login = () => {
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
-                Sign in
-              </Typography>
-              <Typography color="textSecondary" gutterBottom variant="body2">
-                Sign in on the internal platform
+                Đăng nhập
               </Typography>
             </Box>
             <Grid container spacing={3}>
@@ -62,7 +59,7 @@ const Login = () => {
                   size="large"
                   variant="contained"
                 >
-                  Login with Facebook
+                  Đăng nhập với Facebook
                 </Button>
               </Grid>
               <Grid item xs={12} md={6}>
@@ -74,7 +71,7 @@ const Login = () => {
                   startIcon={<GoogleIcon />}
                   variant="contained"
                 >
-                  Login with Google
+                  Đăng nhập với Google
                 </Button>
               </Grid>
             </Grid>
@@ -85,14 +82,14 @@ const Login = () => {
               }}
             >
               <Typography align="center" color="textSecondary" variant="body1">
-                or login with email address
+                hoặc đăng nhập với email
               </Typography>
             </Box>
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
               helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
+              label="Email"
               margin="normal"
               name="email"
               onBlur={formik.handleBlur}
@@ -105,7 +102,7 @@ const Login = () => {
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
-              label="Password"
+              label="Mật khẩu"
               margin="normal"
               name="password"
               onBlur={formik.handleBlur}
@@ -123,24 +120,9 @@ const Login = () => {
                 type="submit"
                 variant="contained"
               >
-                Sign In Now
+                Đăng nhập
               </Button>
             </Box>
-            <Typography color="textSecondary" variant="body2">
-              Don&apos;t have an account?{" "}
-              <NextLink href="/register">
-                <Link
-                  to="/register"
-                  variant="subtitle2"
-                  underline="hover"
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                >
-                  Sign Up
-                </Link>
-              </NextLink>
-            </Typography>
           </form>
         </Container>
       </Box>
