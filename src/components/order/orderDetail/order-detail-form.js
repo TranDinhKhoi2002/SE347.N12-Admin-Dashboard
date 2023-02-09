@@ -40,15 +40,9 @@ export const OrderDetailForm = () => {
   const formik = useFormik({
     initialValues: {
       status: 1,
-      note: "",
     },
     validationSchema: Yup.object({}),
-    onSubmit: (values) => {
-      // props.setValues({
-      //   name: values.name,
-      //   lastName: values.lastName,
-      // });
-    },
+    onSubmit: (values) => {},
   });
 
   return (
