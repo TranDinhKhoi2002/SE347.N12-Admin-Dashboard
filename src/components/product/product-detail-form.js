@@ -24,11 +24,11 @@ import { useRouter } from "next/router";
 import { categories as categoryList } from "~/__mocks__/categories";
 import * as Yup from "yup";
 
-export const AddProductForm = () => {
+export const ProductDetailForm = ({ product }) => {
   const router = useRouter();
   const inputFileRef = useRef();
-  const [filename, setFilename] = useState("");
-  const [uploadedFile, setUploadedFile] = useState();
+  const [filename, setFilename] = useState(product.image);
+  const [uploadedFile, setUploadedFile] = useState(product.image);
   const handleFileUpload = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       return;
@@ -53,10 +53,10 @@ export const AddProductForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      price: "",
-      discription: "",
-      category: "",
+      name: product.name,
+      price: product.price,
+      discription: product.discription,
+      category: product.categories,
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Vui lòng nhập tên sản phẩm"),
@@ -73,7 +73,7 @@ export const AddProductForm = () => {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          p: 2,
+          p: { sm: 2, xs: 1 },
         }}
       >
         <Button color="secondary" variant="contained" sx={{ mr: 1 }} onClick={handleNavigate}>
@@ -84,7 +84,7 @@ export const AddProductForm = () => {
         </Button>
       </Box>
       <Card>
-        <CardHeader title="Thông tin sản phẩm" />
+        <CardHeader title={`Thông tin sản phẩm: #${router.query.id}`} />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>

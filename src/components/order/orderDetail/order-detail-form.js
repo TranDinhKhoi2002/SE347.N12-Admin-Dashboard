@@ -1,18 +1,12 @@
-import { useState, useRef } from "react";
-import PropTypes from "prop-types";
 import {
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
   Divider,
   Grid,
-  TextField,
-  InputAdornment,
   Stack,
   Typography,
-  IconButton,
   Avatar,
   Select,
   MenuItem,
@@ -24,7 +18,6 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PersonIcon from "@mui/icons-material/Person";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Image from "next/image";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useFormik } from "formik";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import { dateFormat } from "~/utils/date-format";
@@ -33,7 +26,6 @@ import { useRouter } from "next/router";
 import { OrderDetailListProducts } from "~/components/order/orderDetail/order-detail-list-products";
 import productsInOrder from "~/__mocks__/productsInOrder";
 import * as Yup from "yup";
-import { blue } from "@mui/material/colors";
 
 export const OrderDetailForm = () => {
   const order = productsInOrder;
@@ -286,23 +278,6 @@ export const OrderDetailForm = () => {
                 </Box>
               </Stack>
             </Grid>
-
-            {/* <Grid item md={3} xs={12}>
-              <Divider />
-              <TextField
-                sx={{ mt: 1 }}
-                error={Boolean(formik.touched.note && formik.errors.note)}
-                fullWidth
-                helperText={formik.touched.note && formik.errors.note}
-                label="Ghi chú"
-                name="note"
-                onChange={formik.handleChange}
-                value={formik.values.note}
-                multiline
-                maxRows={3}
-                variant="outlined"
-              />
-            </Grid> */}
           </Grid>
         </CardContent>
         <Divider />

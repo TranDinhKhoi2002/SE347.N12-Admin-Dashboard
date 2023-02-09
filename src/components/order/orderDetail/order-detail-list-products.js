@@ -1,7 +1,6 @@
-import { Chip, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
-import productsInOrder from "~/__mocks__/productsInOrder";
 import DataGridView from "../../ui/DataGrid";
 import Image from "next/image";
 
