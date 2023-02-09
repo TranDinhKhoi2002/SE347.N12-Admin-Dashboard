@@ -1,13 +1,15 @@
 import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
-import { AddProductForm } from "~/components/product/add-product-form";
+import { ProductDetailForm } from "~/components/product/product-detail-form";
+import productDetail from "~/__mocks__/productDetail";
 
 import { DashboardLayout } from "../../components/dashboard-layout";
 const Page = () => {
+  console.log(productDetail);
   return (
     <>
       <Head>
-        <title>Tạo sản phẩm mới | Admin Dashboard</title>
+        <title>Chi tiết sản phẩm | Admin Dashboard</title>
       </Head>
       <Box
         component="main"
@@ -17,21 +19,11 @@ const Page = () => {
         }}
       >
         <Container maxWidth={false}>
-          <Box
-            sx={{
-              alignItems: "center",
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              m: -1,
-            }}
-          >
-            <Typography sx={{ m: 1 }} variant="h4">
-              Tạo sản phẩm mới
+          <Box>
+            <Typography sx={{ m: { sm: 2 }, position: { sm: "absolute" } }} variant="h4">
+              Chi tiết sản phẩm
             </Typography>
-          </Box>
-          <Box sx={{ mt: { xs: 1, sm: -8 } }}>
-            <AddProductForm />
+            <ProductDetailForm product={productDetail} />
           </Box>
         </Container>
       </Box>

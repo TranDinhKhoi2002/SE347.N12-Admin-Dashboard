@@ -1,18 +1,12 @@
-import { useState, useRef } from "react";
-import PropTypes from "prop-types";
 import {
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
   Divider,
   Grid,
-  TextField,
-  InputAdornment,
   Stack,
   Typography,
-  IconButton,
   Avatar,
   Select,
   MenuItem,
@@ -20,16 +14,23 @@ import {
   InputLabel,
 } from "@mui/material";
 
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import PersonIcon from "@mui/icons-material/Person";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Image from "next/image";
 import { useFormik } from "formik";
 import { printNumberWithCommas } from "~/utils/printNumerWithCommas";
 import { dateFormat } from "~/utils/date-format";
 import Iconify from "~/components/UI/Iconify";
 import { useRouter } from "next/router";
 import { OrderDetailListProducts } from "~/components/order/orderDetail/order-detail-list-products";
+import productsInOrder from "~/__mocks__/productsInOrder";
 import * as Yup from "yup";
 
 export const OrderDetailForm = () => {
+  const order = productsInOrder;
+  const shippingPrice = 30000;
+  let totalPrice = order.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   const router = useRouter();
   const day = new Date();
   console.log(dateFormat(day));
@@ -56,7 +57,7 @@ export const OrderDetailForm = () => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: { xs: "center", sm: "space-between" },
+            justifyContent: "space-between",
             flexWrap: "wrap",
             mx: { xs: 0, sm: 2 },
             py: 1,
@@ -67,7 +68,7 @@ export const OrderDetailForm = () => {
             <Box>
               <Iconify width={30} height={30} icon="uil:calender"></Iconify>
             </Box>
-            <Box>
+            <Box sx={{ ml: 1 }}>
               <Typography color="textPrimary" sx={{ fontWeight: "bold" }}>
                 {dateFormat(day)}
               </Typography>
@@ -83,7 +84,7 @@ export const OrderDetailForm = () => {
             }}
           >
             <Box>
-              <FormControl sx={{ minWidth: 120, mr: 1 }} size="small">
+              <FormControl sx={{ minWidth: 180, mr: 1 }} size="small">
                 <InputLabel id="demo-select-small">Trạng thái</InputLabel>
                 <Select
                   labelId="demo-select-small"
@@ -113,7 +114,7 @@ export const OrderDetailForm = () => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: { xs: "center", sm: "space-between" },
+              justifyContent: "space-between",
               flexWrap: "wrap",
               gap: 1,
               mx: { xs: 0, sm: 2 },
@@ -126,10 +127,11 @@ export const OrderDetailForm = () => {
                     backgroundColor: "primary.main",
                     height: 30,
                     width: 30,
+                    p: 2.5,
                     mr: 1,
                   }}
                 >
-                  {/* <PeopleIcon /> */}
+                  <PersonIcon />
                 </Avatar>
               </Box>
               <Box>
@@ -151,10 +153,11 @@ export const OrderDetailForm = () => {
                     backgroundColor: "primary.main",
                     height: 30,
                     width: 30,
+                    p: 2.5,
                     mr: 1,
                   }}
                 >
-                  {/* <PeopleIcon /> */}
+                  <LocalShippingIcon />
                 </Avatar>
               </Box>
               <Box>
@@ -176,10 +179,11 @@ export const OrderDetailForm = () => {
                     backgroundColor: "primary.main",
                     height: 30,
                     width: 30,
+                    p: 2.5,
                     mr: 1,
                   }}
                 >
-                  {/* <PeopleIcon /> */}
+                  <LocationOnIcon />
                 </Avatar>
               </Box>
               <Box>
@@ -196,59 +200,83 @@ export const OrderDetailForm = () => {
             </Box>
           </Box>
           <Grid sx={{ mt: 3 }} container spacing={2}>
-            <Grid item md={9} xs={12} sx={{ mb: 10 }}>
-              <OrderDetailListProducts />
-            </Grid>
-
-            <Grid item md={3} xs={12}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                }}
+            <Grid item xs={12}>
+              <Box sx={{ mb: 15 }}>
+                <OrderDetailListProducts order={order} />
+              </Box>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                justifyContent="space-between"
+                sx={{ flexWrap: "wrap" }}
               >
+                <Card sx={{ minWidth: 300, bgcolor: "#f6f6f6", mb: 2 }}>
+                  <CardContent>
+                    <Typography sx={{ fontSize: 16, fontWeight: "bold" }} color="text.primary">
+                      Thông tin thanh toán
+                    </Typography>
+                    <Box sx={{ display: "flex" }}>
+                      <Image
+                        src={"/static/images/mastercard.png"}
+                        width={20}
+                        height={20}
+                        objectFit="contain"
+                      />
+                      <Typography
+                        gutterBottom
+                        sx={{
+                          display: "inline-block",
+                          whiteSpace: "pre-line",
+                          fontSize: 14,
+                          ml: 1,
+                        }}
+                      >
+                        Master Card **** **** 4768
+                      </Typography>
+                    </Box>
+                    <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+                      Bussiness name:
+                      <span style={{ color: "#000" }}>{" Master Card, inc"}</span>
+                    </Typography>
+                    <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+                      Phone:
+                      <span style={{ color: "#000" }}>{" +1 (800) 555-154-52"}</span>
+                    </Typography>
+                  </CardContent>
+                </Card>
                 <Box
                   sx={{
-                    mb: 1,
-                    textAlign: "end",
-                    width: "80%",
+                    display: "flex",
+                    justifyContent: "end",
                   }}
                 >
-                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography color="textPrimary">Tiền hàng:</Typography>
-                    <Typography color="textPrimary" sx={{ fontWeight: "bold" }}>
-                      100,000 VNĐ
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography color="textPrimary">Tiền ship: </Typography>
-                    <Typography color="textPrimary" sx={{ fontWeight: "bold" }}>
-                      10,000 VNĐ
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography color="textPrimary">Tổng tiền:</Typography>
-                    <Typography color="textPrimary" sx={{ fontWeight: "bold" }} variant="h6">
-                      110,000 VNĐ
-                    </Typography>
+                  <Box
+                    sx={{
+                      mb: 1,
+                      textAlign: "end",
+                      minWidth: 300,
+                    }}
+                  >
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                      <Typography color="textPrimary">Tiền hàng: </Typography>
+                      <Typography color="textPrimary" sx={{ fontWeight: "bold" }}>
+                        {`${printNumberWithCommas(totalPrice)} VNĐ`}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                      <Typography color="textPrimary">Tiền ship: </Typography>
+                      <Typography color="textPrimary" sx={{ fontWeight: "bold" }}>
+                        {`${printNumberWithCommas(shippingPrice)} VNĐ`}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                      <Typography color="textPrimary">Tổng tiền:</Typography>
+                      <Typography color="textPrimary" sx={{ fontWeight: "bold" }} variant="h6">
+                        {`${printNumberWithCommas(totalPrice + shippingPrice)} VNĐ`}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-
-              <Divider />
-              <TextField
-                sx={{ mt: 1 }}
-                error={Boolean(formik.touched.note && formik.errors.note)}
-                fullWidth
-                helperText={formik.touched.note && formik.errors.note}
-                label="Ghi chú"
-                name="note"
-                onChange={formik.handleChange}
-                value={formik.values.note}
-                multiline
-                maxRows={3}
-                variant="outlined"
-              />
+              </Stack>
             </Grid>
           </Grid>
         </CardContent>
